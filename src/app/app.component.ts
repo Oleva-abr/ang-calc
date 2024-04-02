@@ -40,7 +40,6 @@ export class AppComponent {
       this.clearAll();
     } else if (this.funcT == "NoFunction") {
       this.firstNumber = this.calValue;
-      this.calValue = 0;
       this.calNumber = "noValue"
       this.funcT = val;
     } else if (this.funcT !== "NoFunction") {
@@ -56,7 +55,7 @@ export class AppComponent {
       this.totalAssignValue(total, val);
     }
     if (this.funcT == "-") {
-      const total = this.firstNumber + this.secondNumber;
+      const total = this.firstNumber - this.secondNumber;
       this.totalAssignValue(total, val);
     }
     if (this.funcT == "*") {
@@ -68,7 +67,7 @@ export class AppComponent {
       this.totalAssignValue(total, val);
     }
     if (this.funcT == "%") {
-      const total = this.firstNumber / this.secondNumber;
+      const total = this.firstNumber % this.secondNumber;
       this.totalAssignValue(total, val);
     }
   }
@@ -97,3 +96,7 @@ export class AppComponent {
     this.calNumber = "noValue";
   }
 }
+
+
+
+
