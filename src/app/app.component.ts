@@ -1,3 +1,4 @@
+
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
@@ -10,4 +11,112 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'ang-calc';
+
+  calValue: number = 0;
+  funcT: any = "NoFunction"
+
+  calNumber: string = "noValue"
+
+  firstNumber: number = 0;
+  secondNumber: number = 0;
+
+  onClickValue(val: string, type: any) {
+    if (type == "number") {
+      this.onNumberClick(val);
+    } else if (type == "function") {
+      this.onFunctionClick(val);
+    }
+  }
+
+
+  onNumberClick(val: string) {
+    if (this.funcT === "NoFunction" && val !== "c") {
+      this.clearAll();
+    }
+
+    if (!isNaN(Number(val))) {
+      if (this.calNumber !== 'noValue') {
+        this.calNumber += val;
+      } else {
+        this.calNumber = val;
+      }
+      this.calValue = parseFloat(this.calNumber);
+    } else if (val === ".") {
+
+      if (!this.calNumber.includes(".")) {
+        this.calNumber += val;
+        this.calValue = parseFloat(this.calNumber);
+      }
+    }
+  }
+
+
+  onFunctionClick(val: string) {
+    // clear all when click on 
+    if (val === "c") {
+      this.clearAll();
+    }
+
+    else if (this.funcT == "NoFunction") {
+      this.firstNumber = this.calValue;
+      this.calValue = 0;
+      this.calNumber = 'noValue';
+      this.funcT = val;
+    } else if (this.funcT !== "NoFunction") {
+      this.secondNumber = this.calValue;
+      // calculation
+      this.valueCalculate(val)
+    }
+  }
+
+
+  valueCalculate(val: string) {
+    if (this.funcT == "+") {
+      const total = this.firstNumber + this.secondNumber;
+      this.totalAssignValue(total, val);
+    }
+    if (this.funcT == "-") {
+      const total = this.firstNumber - this.secondNumber;
+      this.totalAssignValue(total, val);
+    }
+    if (this.funcT == "*") {
+      const total = this.firstNumber * this.secondNumber;
+      this.totalAssignValue(total, val);
+    }
+    if (this.funcT == "/") {
+      const total = this.firstNumber / this.secondNumber;
+      this.totalAssignValue(total, val);
+    }
+    if (this.funcT == "%") {
+      const total = this.firstNumber % this.secondNumber;
+      this.totalAssignValue(total, val);
+    }
+  }
+
+
+  totalAssignValue(total: number, val: string) {
+    this.calValue = total;
+    this.firstNumber = total;
+    this.secondNumber = 0;
+    this.calNumber = "noValue";
+    this.funcT = val;
+    if (val == "=") { this.onEqualPress() }
+  }
+
+
+  onEqualPress() {
+    this.firstNumber = 0;
+    this.secondNumber = 0;
+    this.funcT = "NoFunction";
+    this.calNumber = "noValue"
+  }
+
+
+  clearAll() {
+    this.firstNumber = 0;
+    this.secondNumber = 0;
+    this.calValue = 0;
+    this.funcT = "NoFunction";
+    this.calNumber = "noValue";
+  }
 }

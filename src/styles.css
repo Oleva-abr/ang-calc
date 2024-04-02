@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.text-6xl {
+  overflow: hidden;
+  white-space: nowrap;
+}
