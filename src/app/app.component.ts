@@ -50,25 +50,29 @@ export class AppComponent {
   }
 
   valueCalculate(val: string) {
-    if (this.funcT == "+") {
-      const total = this.firstNumber + this.secondNumber;
-      this.totalAssignValue(total, val);
-    }
-    if (this.funcT == "-") {
-      const total = this.firstNumber - this.secondNumber;
-      this.totalAssignValue(total, val);
-    }
-    if (this.funcT == "*") {
-      const total = this.firstNumber * this.secondNumber;
-      this.totalAssignValue(total, val);
-    }
-    if (this.funcT == "/") {
-      const total = this.firstNumber / this.secondNumber;
-      this.totalAssignValue(total, val);
-    }
-    if (this.funcT == "%") {
-      const total = this.firstNumber % this.secondNumber;
-      this.totalAssignValue(total, val);
+    switch (this.funcT) {
+      case "+":
+        const additionTotal = this.firstNumber + this.secondNumber;
+        this.totalAssignValue(additionTotal, val);
+        break
+      case "-":
+        const subtractionTotal = this.firstNumber - this.secondNumber;
+        this.totalAssignValue(subtractionTotal, val);
+        break;
+      case "*":
+        const multiplicationTotal = this.firstNumber * this.secondNumber;
+        this.totalAssignValue(multiplicationTotal, val);
+        break;
+      case "/":
+        const divisionTotal = this.firstNumber / this.secondNumber;
+        this.totalAssignValue(divisionTotal, val);
+        break;
+      case "%":
+        const modulusTotal = this.firstNumber % this.secondNumber;
+        this.totalAssignValue(modulusTotal, val);
+        break;
+      default:
+        console.error("Invalid operation:", this.funcT);
     }
   }
 
